@@ -72,4 +72,6 @@ else:
     f.write(str(os.getpid()))
     f.close()
 
+api_put("qwe", "qwe")
+
 os.remove(pid_file)
