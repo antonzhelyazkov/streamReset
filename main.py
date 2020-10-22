@@ -81,10 +81,10 @@ else:
     f.close()
 
 header = {
-    'Accept:application/json': 'charset=utf-8',
-    'Content-type:application/json': 'charset=utf-8'
+    'Accept': 'application/json',
+    'Content-type': 'application/json'
 }
-qwe = requests.put(api_url("mmtv", "mmtv.stream"), auth=HTTPDigestAuth('wowza', 'qah75m9w2m7'))
+qwe = requests.put(api_url("mmtv", "mmtv.stream"), auth=HTTPDigestAuth('wowza', 'qah75m9w2m7'), headers=header)
 print(qwe)
 
 os.remove(pid_file)
