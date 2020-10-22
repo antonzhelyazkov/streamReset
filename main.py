@@ -4,7 +4,7 @@ import logging
 import os
 import sys
 import requests
-from requests.auth import HTTPBasicAuth
+from requests.auth import HTTPDigestAuth
 
 verbose = False
 config_file = "./config.json"
@@ -84,7 +84,7 @@ header = {
     'Accept:application/json': 'charset=utf-8',
     'Content-type:application/json': 'charset=utf-8'
 }
-qwe = requests.put(api_url("mmtv", "mmtv.stream"), auth=HTTPBasicAuth('wowza', 'qah75m9w2m7'))
+qwe = requests.put(api_url("mmtv", "mmtv.stream"), auth=HTTPDigestAuth('wowza', 'qah75m9w2m7'))
 print(qwe)
 
 os.remove(pid_file)
