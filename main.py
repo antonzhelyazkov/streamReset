@@ -59,6 +59,15 @@ def api_url(application, stream):
     return current_url
 
 
+def api_put(url, user, password):
+    header = {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+    }
+    respond = requests.put(url, auth=HTTPDigestAuth(user, password), headers=header)
+    return respond
+
+
 try:
     config_open = open(config_file, encoding='utf-8')
 except Exception as e:
@@ -80,11 +89,6 @@ else:
     f.write(str(os.getpid()))
     f.close()
 
-header = {
-    'Accept': 'application/json',
-    'Content-type': 'application/json'
-}
-qwe = requests.put(api_url("mmtv", "mmtv.stream"), auth=HTTPDigestAuth('wowza', 'qah75m9w2m7'), headers=header)
-print(qwe)
+print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
 
 os.remove(pid_file)
