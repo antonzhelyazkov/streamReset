@@ -47,8 +47,8 @@ def print_log(debug, message):
 
 
 def api_put(application, stream):
-    currentUrl = "http://" + config_data['host'] + ":" + config_data['port']
-    print_log(verbose, f"URL {currentUrl}")
+    current_url = "http://" + config_data['host'] + ":" + config_data['port']
+    print_log(verbose, f"URL {current_url}")
 
 
 try:
