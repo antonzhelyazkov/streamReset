@@ -46,9 +46,15 @@ def print_log(debug, message):
         exit(1)
 
 
-def api_put(application, stream):
-    current_url = "http://" + config_data['host'] + ":" + config_data['port']
+def api_url(application, stream):
+    current_url = "http://" + config_data['host'] + ":" + config_data['port'] + \
+                  "/v2/servers/_defaultServer_/vhosts/_defaultVHost_/applications/" + \
+                  application + \
+                  "/instances/_definst_/incomingstreams/" + \
+                  stream + \
+                  "/actions/resetStream"
     print_log(verbose, f"URL {current_url}")
+    return current_url
 
 
 try:
@@ -72,6 +78,6 @@ else:
     f.write(str(os.getpid()))
     f.close()
 
-api_put("qwe", "qwe")
+api_url("qwe", "qwe.stream")
 
 os.remove(pid_file)
