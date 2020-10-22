@@ -60,7 +60,7 @@ pid_file = pid_file_path.rstrip('/') + "/" + file_name[0] + ".pid"
 
 isPID = os.path.isfile(pid_file)
 if isPID:
-    print("PID file exists " + pid_file)
+    print_log(verbose, f"PID file exists {pid_file}")
     sys.exit()
 else:
     f = open(pid_file, "w")
