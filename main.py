@@ -84,7 +84,7 @@ header = {
     'Accept:application/json': 'charset=utf-8',
     'Content-type:application/json': 'charset=utf-8'
 }
-qwe = requests.get(api_url("mmtv", "mmtv.stream"), auth=HTTPBasicAuth('wowza', 'qah75m9w2m7'), header=header)
+qwe = requests.put(api_url("mmtv", "mmtv.stream"), auth=HTTPBasicAuth('wowza', 'qah75m9w2m7'))
 print(qwe)
 
 os.remove(pid_file)
