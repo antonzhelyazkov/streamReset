@@ -46,6 +46,11 @@ def print_log(debug, message):
         exit(1)
 
 
+def api_put(application, stream):
+    currentUrl = "http://" + config_data['host'] + ":" + config_data['port']
+    print_log(verbose, f"URL {currentUrl}")
+
+
 try:
     config_open = open(config_file, encoding='utf-8')
 except Exception as e:
@@ -67,6 +72,4 @@ else:
     f.write(str(os.getpid()))
     f.close()
 
-
-
-# os.remove(pid_file)
+os.remove(pid_file)
