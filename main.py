@@ -3,6 +3,8 @@ import json
 import logging
 import os
 import sys
+import requests
+from requests.auth import HTTPBasicAuth
 
 verbose = False
 config_file = "./config.json"
@@ -78,6 +80,6 @@ else:
     f.write(str(os.getpid()))
     f.close()
 
-api_url("qwe", "qwe.stream")
+requests.get(api_url("mmtv", "mmtv.stream"), auth=HTTPBasicAuth('wowza', 'qah75m9w2m7'))
 
 os.remove(pid_file)
