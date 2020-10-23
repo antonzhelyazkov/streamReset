@@ -60,7 +60,7 @@ def api_url(application, stream):
 
 
 def m3u8_stream(application ,stream):
-    current_url = "http://" + config_data['host'] + ":" + config_data['port_stream'] + \
+    current_url = "http://" + config_data['host'] + ":" + config_data['port_stream'] + "/" + \
                   application + "/" + stream + "/playlist.m3u8"
     print_log(verbose, f"current url {current_url}")
     return current_url
