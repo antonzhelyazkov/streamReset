@@ -107,13 +107,12 @@ else:
     f.close()
 
 # print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
-#m3u8_streams = m3u8_streams_arr(config_data['apps'])
-#for m3u8_url in m3u8_streams:
-#    status = requests.get(m3u8_url)
-#    print_log(verbose, f"status {status} url {m3u8_url}")
-#    if int(status) != 200:
-#        api_put(api_url())
+arr_couples = stream_couples(config_data['apps'])
+for c_app, c_stream in arr_couples:
+    m3u8_url = m3u8_stream(c_app, c_stream)
+    status = requests.get(m3u8_url)
+    print_log(verbose, f"status {status} url {m3u8_url}")
+    # if int(status) != 200:
 
-print(stream_couples(config_data['apps']))
 
 os.remove(pid_file)
