@@ -68,6 +68,12 @@ def api_put(url, user, password):
     return respond.json()
 
 
+def api_urls_arr(apps):
+    for app, streams in apps.items():
+        for stream in streams:
+            return api_url(app, stream)
+
+
 try:
     config_open = open(config_file, encoding='utf-8')
 except Exception as e:
@@ -89,10 +95,7 @@ else:
     f.write(str(os.getpid()))
     f.close()
 
-print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
-
-for app, streams in config_data['apps'].items():
-    for stream in streams:
-        print(api_url(app, stream))
+# print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
+print(api_urls_arr(config_data['apps']))
 
 os.remove(pid_file)
