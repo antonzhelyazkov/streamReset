@@ -59,7 +59,7 @@ def api_url(application, stream):
     return current_url
 
 
-def m3u8_stream(application ,stream):
+def m3u8_stream(application, stream):
     current_url = "http://" + config_data['host'] + ":" + config_data['port_stream'] + "/" + \
                   application + "/" + stream + "/playlist.m3u8"
     print_log(verbose, f"current url {current_url}")
@@ -75,13 +75,14 @@ def api_put(url, user, password):
     return respond.json()
 
 
-def m3u8_streams_arr(apps):
-    urls = []
+def stream_couples(apps):
+    couples = []
     for app, streams in apps.items():
         for stream in streams:
-            urls.append(m3u8_stream(app, stream))
+            couple = [app, stream]
+            couples.append(couple)
 
-    return urls
+    return couples
 
 
 try:
@@ -106,9 +107,13 @@ else:
     f.close()
 
 # print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
-m3u8_streams = m3u8_streams_arr(config_data['apps'])
-for m3u8_url in m3u8_streams:
-    status = requests.get(m3u8_url)
-    print(status.status_code)
+#m3u8_streams = m3u8_streams_arr(config_data['apps'])
+#for m3u8_url in m3u8_streams:
+#    status = requests.get(m3u8_url)
+#    print_log(verbose, f"status {status} url {m3u8_url}")
+#    if int(status) != 200:
+#        api_put(api_url())
+
+print(stream_couples(config_data['apps']))
 
 os.remove(pid_file)
