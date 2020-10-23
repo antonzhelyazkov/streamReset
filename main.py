@@ -106,7 +106,6 @@ else:
     f.write(str(os.getpid()))
     f.close()
 
-# print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
 arr_couples = stream_couples(config_data['apps'])
 for c_app, c_stream in arr_couples:
     m3u8_url = m3u8_stream(c_app, c_stream)
@@ -114,7 +113,8 @@ for c_app, c_stream in arr_couples:
     print_log(verbose, f"status {status} url {m3u8_url}")
     if int(status) != 200:
         print_log(verbose, f"ERROR in {m3u8_url}")
-        api_put(api_url(c_app, c_stream), config_data['user'], config_data['pass'])
+        api_respond = api_put(api_url(c_app, c_stream), config_data['user'], config_data['pass'])
+        print(api_respond)
     else:
         print_log(verbose, f"OK {m3u8_url}")
 
