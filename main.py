@@ -114,7 +114,10 @@ for c_app, c_stream in arr_couples:
     if int(status) != 200:
         print_log(verbose, f"ERROR in {m3u8_url}")
         api_respond = api_put(api_url(c_app, c_stream), config_data['user'], config_data['pass'])
-        print(api_respond)
+        if not api_respond['success']:
+            print_log(verbose, f"ERROR in restart {m3u8_url}")
+        else:
+            print_log(verbose, f"OK in restart {m3u8_url}")
     else:
         print_log(verbose, f"OK {m3u8_url}")
 
