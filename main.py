@@ -91,7 +91,7 @@ else:
 
 print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
 
-for app in config_data['apps'].items:
+for app in config_data['apps'].items():
     print(app)
 
 os.remove(pid_file)
