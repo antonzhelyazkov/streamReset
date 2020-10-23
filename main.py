@@ -110,9 +110,13 @@ else:
 arr_couples = stream_couples(config_data['apps'])
 for c_app, c_stream in arr_couples:
     m3u8_url = m3u8_stream(c_app, c_stream)
-    status = requests.get(m3u8_url).json()
+    status = requests.get(m3u8_url)
     print_log(verbose, f"status {status} url {m3u8_url}")
-    # if int(status) != 200:
+    if int(status.status_code) != 200:
+        print_log(verbose, f"ERROR in {m3u8_url}")
+        api_put(api_url(c_app, c_stream), config_data['user'], config_data['pass'])
+    else:
+        print_log(verbose, f"OK {m3u8_url}")
 
 
 os.remove(pid_file)
