@@ -106,6 +106,9 @@ else:
     f.close()
 
 # print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
-print(m3u8_streams_arr(config_data['apps']))
+m3u8_streams = m3u8_streams_arr(config_data['apps'])
+for m3u8_url in m3u8_streams:
+    status = requests.get(m3u8_url)
+    print(status.status_code)
 
 os.remove(pid_file)
