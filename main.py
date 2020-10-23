@@ -59,6 +59,13 @@ def api_url(application, stream):
     return current_url
 
 
+def m3u8_stream(application ,stream):
+    current_url = "http://" + config_data['host'] + ":" + config_data['port'] + \
+                  application + "/" + stream + "/playlist.m3u8"
+    print_log(verbose, f"current url {current_url}")
+    return current_url
+
+
 def api_put(url, user, password):
     header = {
         'Accept': 'application/json',
@@ -68,11 +75,11 @@ def api_put(url, user, password):
     return respond.json()
 
 
-def api_urls_arr(apps):
+def m3u8_streams_arr(apps):
     urls = []
     for app, streams in apps.items():
         for stream in streams:
-            urls.append(api_url(app, stream))
+            urls.append(m3u8_stream(app, stream))
 
     return urls
 
@@ -99,6 +106,6 @@ else:
     f.close()
 
 # print_log(verbose, api_put(api_url("mmtv", "mmtv.stream"), config_data['user'], config_data['pass']))
-print(api_urls_arr(config_data['apps']))
+print(m3u8_streams_arr(config_data['apps']))
 
 os.remove(pid_file)
