@@ -65,7 +65,7 @@ def api_put(url, user, password):
         'Content-type': 'application/json'
     }
     respond = requests.put(url, auth=HTTPDigestAuth(user, password), headers=header)
-    return respond
+    return respond.json()
 
 
 try:
