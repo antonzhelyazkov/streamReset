@@ -69,9 +69,12 @@ def api_put(url, user, password):
 
 
 def api_urls_arr(apps):
+    urls = []
     for app, streams in apps.items():
         for stream in streams:
-            return api_url(app, stream)
+            urls.append(api_url(app, stream))
+
+    return urls
 
 
 try:
