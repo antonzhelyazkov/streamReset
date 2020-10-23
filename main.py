@@ -110,8 +110,8 @@ else:
 arr_couples = stream_couples(config_data['apps'])
 for c_app, c_stream in arr_couples:
     m3u8_url = m3u8_stream(c_app, c_stream)
-    status = requests.get(m3u8_url)
-    print_log(verbose, f"status {status.json()} url {m3u8_url}")
+    status = requests.get(m3u8_url).json()
+    print_log(verbose, f"status {status} url {m3u8_url}")
     # if int(status) != 200:
 
 
