@@ -25,8 +25,6 @@ for opt, arg in opts:
         verbose = True
     if opt in ['-y', '--dry']:
         dry_run = True
-    else:
-        print("HELP")
 
 
 def print_log(debug, message):
