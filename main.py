@@ -107,17 +107,17 @@ else:
 arr_couples = stream_couples(config_data['apps'])
 for c_app, c_stream in arr_couples:
     m3u8_url = m3u8_stream(c_app, c_stream)
-    status = requests.get(m3u8_url).status_code
-    print_log(verbose, f"status {status} url {m3u8_url}")
-    if int(status) != 200:
-        print_log(verbose, f"ERROR in {m3u8_url}")
-        api_respond = api_put(api_url(c_app, c_stream), config_data['user'], config_data['pass'])
-        if not api_respond['success']:
-            print_log(verbose, f"ERROR in restart {m3u8_url}")
-        else:
-            print_log(verbose, f"OK in restart {m3u8_url}")
-    else:
-        print_log(verbose, f"OK {m3u8_url}")
+    # status = requests.get(m3u8_url).status_code
+    # print_log(verbose, f"status {status} url {m3u8_url}")
+    # if int(status) != 200:
+    #     print_log(verbose, f"ERROR in {m3u8_url}")
+    #     api_respond = api_put(api_url(c_app, c_stream), config_data['user'], config_data['pass'])
+    #     if not api_respond['success']:
+    #         print_log(verbose, f"ERROR in restart {m3u8_url}")
+    #     else:
+    #         print_log(verbose, f"OK in restart {m3u8_url}")
+    # else:
+    #     print_log(verbose, f"OK {m3u8_url}")
 
 
 os.remove(pid_file)
