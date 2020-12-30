@@ -8,7 +8,7 @@ from requests.auth import HTTPDigestAuth
 
 verbose = False
 config_file = "./config.json"
-log_dir = "."
+log_dir_default = "."
 dry_run = False
 argv = sys.argv[1:]
 
@@ -28,22 +28,28 @@ for opt, arg in opts:
 
 
 def print_log(debug, message):
-    try:
-        current_log_dir = config_data['log_dir']
-    except Exception:
-        current_log_dir = log_dir
+    file_name = os.path.basename(sys.argv[0]).split(".")
+
+    current_log_dir = add_directory_slash(config_data['log_dir'])
 
     if os.path.isdir(current_log_dir):
-        log_file_name = os.path.basename(sys.argv[0]).split(".")
-        script_log = current_log_dir + "/" + log_file_name[0] + ".log"
-        logging.basicConfig(filename=script_log, level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
-        logging.info(message)
-        if debug is True:
-            print(message)
-
+        script_log = current_log_dir + "/" + file_name[0] + ".log"
     else:
-        print(f"log directory does not exist {current_log_dir}")
-        exit(1)
+        script_log = log_dir_default + "/" + file_name[0] + ".log"
+
+    logging.basicConfig(filename=script_log, level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
+    logging.info(message)
+
+    if debug is True:
+        print(message)
+
+
+def add_directory_slash(directory):
+    if not directory.endswith("/"):
+        dir_return = directory + "/"
+    else:
+        dir_return = directory
+    return dir_return
 
 
 def api_url(application, stream):
@@ -92,8 +98,8 @@ else:
     config_data = json.load(config_open)
 
 pid_file_path = config_data['pid_file_path']
-file_name = os.path.basename(sys.argv[0]).split(".")
-pid_file = pid_file_path.rstrip('/') + "/" + file_name[0] + ".pid"
+FILE_NAME = os.path.basename(sys.argv[0]).split(".")
+pid_file = pid_file_path.rstrip('/') + "/" + FILE_NAME[0] + ".pid"
 
 isPID = os.path.isfile(pid_file)
 if isPID:
