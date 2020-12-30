@@ -89,13 +89,12 @@ def stream_couples(apps):
     return couples
 
 
-try:
+if os.path.isfile(config_file):
     config_open = open(config_file, encoding='utf-8')
-except Exception as e:
-    print_log(verbose, e)
-    exit(1)
-else:
     config_data = json.load(config_open)
+else:
+    print_log(verbose, f"ERROR config file {config_file} not found")
+    sys.exit(1)
 
 pid_file_path = config_data['pid_file_path']
 FILE_NAME = os.path.basename(sys.argv[0]).split(".")
